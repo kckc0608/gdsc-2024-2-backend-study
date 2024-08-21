@@ -7,7 +7,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 public class BeanTest {
 
-    ApplicationContext context = new AnnotationConfigApplicationContext(TestConfig2.class);
+    ApplicationContext context = new AnnotationConfigApplicationContext(TestConfig.class);
 
     @Test
     void checkAllBeans() {
@@ -22,9 +22,19 @@ public class BeanTest {
         MyBean myBean2 = context.getBean(MyBean.class);
         System.out.println(myBean1.getClass().getName());
         System.out.println(myBean1);
-        System.out.println(myBean2.getClass().getName());
         System.out.println(myBean2);
 
         Assertions.assertThat(myBean1).isSameAs(myBean2);
+    }
+
+    @Test
+    void checkMySubBean() {
+        MySubBean mySubBean1 = context.getBean(MySubBean.class);
+        MySubBean mySubBean2 = context.getBean(MySubBean.class);
+        System.out.println(mySubBean1.getClass().getName());
+        System.out.println(mySubBean1);
+        System.out.println(mySubBean2);
+
+        Assertions.assertThat(mySubBean1).isSameAs(mySubBean2);
     }
 }
