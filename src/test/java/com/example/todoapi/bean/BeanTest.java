@@ -37,4 +37,15 @@ public class BeanTest {
 
         Assertions.assertThat(mySubBean1).isSameAs(mySubBean2);
     }
+
+    @Test
+    void checkMyBeanHasMySubBean() {
+        MyBean myBean = context.getBean(MyBean.class);
+        MySubBean mySubBean = context.getBean(MySubBean.class);
+
+        System.out.println("myBean = " + myBean.getMySubBean());
+        System.out.println("mySubBean = " + mySubBean);
+
+        Assertions.assertThat(myBean.getMySubBean()).isSameAs(mySubBean);
+    }
 }
