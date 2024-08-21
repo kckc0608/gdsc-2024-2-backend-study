@@ -8,7 +8,7 @@ public class TestConfig {
 
     @Bean
     MyBean myBean() {
-        return new MyBean(mySubBean());
+        return new MyBean();
     }
 
     @Bean
