@@ -12,9 +12,14 @@ import jakarta.persistence.ManyToOne;
 
 import com.example.todoapi.user.User;
 
+import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Todo {
 
     @Id
@@ -32,7 +37,6 @@ public class Todo {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Builder
     public Todo(String content, boolean isChecked, User user) {
         this.content = content;
         this.isChecked = isChecked;
