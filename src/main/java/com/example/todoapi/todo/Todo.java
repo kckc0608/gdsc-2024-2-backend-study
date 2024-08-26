@@ -12,6 +12,8 @@ import jakarta.persistence.ManyToOne;
 
 import com.example.todoapi.user.User;
 
+import lombok.Builder;
+
 @Entity
 public class Todo {
 
@@ -29,4 +31,11 @@ public class Todo {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @Builder
+    public Todo(String content, boolean isChecked, User user) {
+        this.content = content;
+        this.isChecked = isChecked;
+        this.user = user;
+    }
 }
