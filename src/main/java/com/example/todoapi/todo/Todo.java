@@ -42,4 +42,8 @@ public class Todo {
         this.isChecked = isChecked;
         this.user = user;
     }
+
+    public void updateContent(String content) {
+        this.content = content;
+    }
 }

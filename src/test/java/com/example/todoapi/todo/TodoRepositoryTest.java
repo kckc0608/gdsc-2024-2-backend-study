@@ -88,6 +88,19 @@ public class TodoRepositoryTest {
         assertThat(todosByUser2).hasSize(1);
     }
 
+    @Test
+    @Transactional
+    @Rollback(value = false)
+    void updateTodo() {
+        // given
+        Todo todo = new Todo("content", false, null);
+        todoRepository.save(todo);
+        Todo findTodo = todoRepository.findById(todo.getId());
+
+        // when
+        findTodo.updateContent("newContent");
+    }
+
     @AfterAll
     static void test() {
         System.out.println("test finish");
