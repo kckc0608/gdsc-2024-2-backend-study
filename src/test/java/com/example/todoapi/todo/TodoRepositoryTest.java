@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.todoapi.user.User;
@@ -28,7 +27,7 @@ public class TodoRepositoryTest {
     @Transactional
     void todoCreateTest() {
         // given
-        Todo todo = new Todo("content", false, null);
+        Todo todo = new Todo("content", null);
 
         // when
         todoRepository.save(todo);
@@ -41,7 +40,7 @@ public class TodoRepositoryTest {
     @Transactional
     void todoFindOneTest() {
         // given
-        Todo todo = new Todo("content", false, null);
+        Todo todo = new Todo("content", null);
         todoRepository.save(todo);
 
         // when
@@ -57,9 +56,9 @@ public class TodoRepositoryTest {
     @Transactional
     void todoFindAllTest() {
         // given
-        todoRepository.save(new Todo("content1", false, null));
-        todoRepository.save(new Todo("content2", false, null));
-        todoRepository.save(new Todo("content3", false, null));
+        todoRepository.save(new Todo("content1", null));
+        todoRepository.save(new Todo("content2", null));
+        todoRepository.save(new Todo("content3", null));
 
         // when
         List<Todo> todos = todoRepository.findAll();
@@ -75,9 +74,9 @@ public class TodoRepositoryTest {
         User user1 = new User(); User user2 = new User();
         userRepository.save(user1); userRepository.save(user2);
 
-        todoRepository.save(new Todo("content1", false, user1));
-        todoRepository.save(new Todo("content2", false, user1));
-        todoRepository.save(new Todo("content3", false, user2));
+        todoRepository.save(new Todo("content1", user1));
+        todoRepository.save(new Todo("content2", user1));
+        todoRepository.save(new Todo("content3", user2));
 
         // when
         List<Todo> todosByUser1 = todoRepository.findAllByUser(user1);
@@ -90,10 +89,9 @@ public class TodoRepositoryTest {
 
     @Test
     @Transactional
-    @Rollback(value = false)
     void updateTodo() {
         // given
-        Todo todo = new Todo("content", false, null);
+        Todo todo = new Todo("content", null);
         todoRepository.save(todo);
         Todo findTodo = todoRepository.findById(todo.getId());
 
@@ -103,13 +101,12 @@ public class TodoRepositoryTest {
 
     @Test
     @Transactional
-    @Rollback(value = false)
     void todoRemoveTest() {
         // given
-        Todo todo = new Todo("to remove todo", false, null);
+        Todo todo = new Todo("to remove todo", null);
         todoRepository.save(todo);
-        todoRepository.save(new Todo("content1", false, null));
-        todoRepository.save(new Todo("content2", false, null));
+        todoRepository.save(new Todo("content1", null));
+        todoRepository.save(new Todo("content2", null));
 
         // when
         todoRepository.deleteById(todo.getId());

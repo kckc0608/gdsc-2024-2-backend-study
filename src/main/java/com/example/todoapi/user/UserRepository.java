@@ -15,4 +15,8 @@ public class UserRepository {
         em.persist(user);
     }
 
+    public User findById(Long id) {
+        return em.find(User.class, id);
+    }
+
 }

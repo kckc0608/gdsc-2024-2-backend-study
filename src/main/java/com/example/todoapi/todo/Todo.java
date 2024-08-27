@@ -31,15 +31,14 @@ public class Todo {
     private String content;
 
     @Column(name = "todo_is_check", columnDefinition = "tinyint(1)")
-    private boolean isChecked;
+    private boolean isChecked = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Todo(String content, boolean isChecked, User user) {
+    public Todo(String content, User user) {
         this.content = content;
-        this.isChecked = isChecked;
         this.user = user;
     }
 
