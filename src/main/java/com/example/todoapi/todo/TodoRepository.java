@@ -34,5 +34,8 @@ public class TodoRepository {
                 .getResultList();
     }
 
-
+    public void deleteById(Long id) {
+        Todo todo = em.find(Todo.class, id);
+        em.remove(todo);
+    }
 }

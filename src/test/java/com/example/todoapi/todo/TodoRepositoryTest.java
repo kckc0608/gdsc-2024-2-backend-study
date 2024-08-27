@@ -101,6 +101,20 @@ public class TodoRepositoryTest {
         findTodo.updateContent("newContent");
     }
 
+    @Test
+    @Transactional
+    @Rollback(value = false)
+    void todoRemoveTest() {
+        // given
+        Todo todo = new Todo("to remove todo", false, null);
+        todoRepository.save(todo);
+        todoRepository.save(new Todo("content1", false, null));
+        todoRepository.save(new Todo("content2", false, null));
+
+        // when
+        todoRepository.deleteById(todo.getId());
+    }
+
     @AfterAll
     static void test() {
         System.out.println("test finish");
