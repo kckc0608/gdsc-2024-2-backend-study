@@ -17,7 +17,7 @@ public class TodoService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void createTodo(String content, Long userId) throws Exception {
+    public Long createTodo(String content, Long userId) throws Exception {
         User user = userRepository.findById(userId);
 
         if (user == null) {
@@ -26,6 +26,7 @@ public class TodoService {
 
         Todo todo = new Todo(content, user);
         todoRepository.save(todo);
+        return todo.getId();
     }
 
     @Transactional(readOnly = true)
@@ -46,7 +47,7 @@ public class TodoService {
     }
 
     @Transactional
-    public void deleteContent(Long todoId) {
+    public void deleteTodo(Long todoId) {
         todoRepository.deleteById(todoId);
     }
 
