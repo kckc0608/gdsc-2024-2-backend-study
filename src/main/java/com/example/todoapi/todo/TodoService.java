@@ -3,6 +3,7 @@ package com.example.todoapi.todo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.todoapi.common.exception.BadRequestException;
 import com.example.todoapi.user.User;
 import com.example.todoapi.user.UserRepository;
 
@@ -21,7 +22,7 @@ public class TodoService {
         User user = userRepository.findById(userId);
 
         if (user == null) {
-            throw new Exception("존재하지 않는 유저 ID 입니다.");
+            throw new BadRequestException("존재하지 않는 유저 ID 입니다.");
         }
 
         Todo todo = new Todo(content, user);
@@ -34,7 +35,7 @@ public class TodoService {
         User user = userRepository.findById(userId);
 
         if (user == null) {
-            throw new Exception("존재하지 않는 유저 ID 입니다.");
+            throw new BadRequestException("존재하지 않는 유저 ID 입니다.");
         }
 
         return todoRepository.findAllByUser(user);
