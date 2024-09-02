@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.todoapi.common.message.ExceptionMessage;
+
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import java.net.URI;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +27,7 @@ public class TodoController {
     private final TodoService todoService;
 
     @PostMapping
+    @ApiResponse(responseCode = "404", description = "요청에 들어온 user id 가 존재하지 않음")
     public ResponseEntity<Void> createTodo(@RequestBody @Valid TodoCreateRequest request) throws Exception {
         Long todoId = todoService.createTodo(request.getContent(), request.getUserId());
         return ResponseEntity.created(URI.create("/todo/" + todoId)).build();
