@@ -1,14 +1,13 @@
 package com.example.todoapi.bean;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @Component
 @Getter
+@RequiredArgsConstructor
 public class MyBean {
 
-    @Autowired
-    private MySubBean mySubBean;
+    private final MySubBean mySubBean;
 }
