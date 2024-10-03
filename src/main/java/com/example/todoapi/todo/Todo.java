@@ -1,0 +1,34 @@
+package com.example.todoapi.todo;
+
+import com.example.todoapi.member.Member;
+import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
+public class Todo {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "todo_id")
+    private Long id;
+
+    @Column(name = "todo_contenet", columnDefinition = "varchar(200)")
+    private String content;
+
+    @Column(name = "todo_is_checked", columnDefinition = "tinyint(1)")
+    private boolean isChecked;
+
+    @JoinColumn(name = "member_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Member member;
+
+    public Todo(String content, boolean isChecked, Member member) {
+        this.content = content;
+        this.isChecked = isChecked;
+        this.member = member;
+    }
+}
