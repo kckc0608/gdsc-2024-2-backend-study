@@ -1,4 +1,4 @@
-package com.example.todoapi.user;
+package com.example.todoapi.member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,11 +8,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "users")
-public class User {
+public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "member_id")
     private Long id;
 }

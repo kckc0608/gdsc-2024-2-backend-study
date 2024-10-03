@@ -10,9 +10,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
-import com.example.todoapi.user.User;
+import com.example.todoapi.member.Member;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Todo {
 
     @Id
@@ -28,5 +33,15 @@ public class Todo {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user;
+    private Member member;
+
+    public Todo(String content, boolean isChecked, Member member) {
+        this.content = content;
+        this.isChecked = isChecked;
+        this.member = member;
+    }
+
+    public void updateContent(String newContent) {
+        this.content = newContent;
+    }
 }
