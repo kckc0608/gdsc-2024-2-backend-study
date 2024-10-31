@@ -23,8 +23,8 @@ public class FriendRepository {
 
     public List<Friend> findByMember(Member member) {
         return em.createQuery(
-                "select f from Friend f where Friend.member1 = :member or Friend .member2 = :member", Friend.class)
-                .setParameter("member", member)
+                "select f from Friend f where f.member1 = :check_member or f.member2 = :check_member", Friend.class)
+                .setParameter("check_member", member)
                 .getResultList();
     }
 }
