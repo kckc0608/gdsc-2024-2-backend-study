@@ -15,7 +15,6 @@ public class MemberRepository {
     }
 
     public Member findById(Long id) {
-        em.find(Member.class, id);
-        return null;
+        return em.find(Member.class, id);
     }
 }
