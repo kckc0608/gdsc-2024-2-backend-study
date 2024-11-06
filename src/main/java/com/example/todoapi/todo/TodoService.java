@@ -58,7 +58,7 @@ public class TodoService {
     }
 
     @Transactional
-    public void deleteTodo(Long todoId, Long memberId) throws Exception {
+    public void deleteTodo(Long todoId) throws Exception {
         todoRepository.deleteById(todoId);
     }
 
